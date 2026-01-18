@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:17
+    container_name: reagen-postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: senha
+      POSTGRES_DB: reagen
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  app:
+    image: mcr.microsoft.com/dotnet/sdk:10.0
+    container_name: reagen-app
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    command: ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:5000"]
+
+volumes:
+  db-data:
