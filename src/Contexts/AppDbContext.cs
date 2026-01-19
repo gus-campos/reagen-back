@@ -53,5 +53,14 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<Reagent>()
             .OwnsMany(p => p.Sizes);
+
+        // Auto include
+        modelBuilder.Entity<Reagent>()
+            .Navigation(r => r.ControlAgency)
+            .AutoInclude();
+
+        modelBuilder.Entity<Package>()
+            .Navigation(p => p.Brand)
+            .AutoInclude();
     }
 }

@@ -6,7 +6,6 @@ public interface IWithId
     int Id { get; set; }
 }
 
-// Base genérico para qualquer entidade com Id
 [ApiController]
 public abstract class CrudControllerBase<TEntity> : ControllerBase where TEntity : class, IWithId
 {
