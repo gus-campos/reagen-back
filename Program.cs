@@ -26,10 +26,10 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-if (!app.Environment.IsProduction())
-{
-    app.UseHttpsRedirection();
-}
+// if (app.Environment.IsProduction())
+// {
+// app.UseHttpsRedirection();
+// }
 
 app.MapControllers();
 app.Run();
