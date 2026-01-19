@@ -30,6 +30,9 @@ services:
       dockerfile: Dockerfile.migrations
     depends_on:
       - db
+    volumes:
+      - nuget:/root/.nuget/packages
 
 volumes:
   db-data:
+  nuget:
