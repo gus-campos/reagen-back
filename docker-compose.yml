@@ -12,16 +12,21 @@ services:
       - db-data:/var/lib/postgresql/data
 
   app:
-    image: mcr.microsoft.com/dotnet/sdk:10.0
-    container_name: reagen-app
-    working_dir: /app
-    volumes:
-      - ./:/app
-    ports:
-      - "5000:5000"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: reagen-api
     depends_on:
       - db
-    command: ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:5000"]
+    ports:
+      - "5000:5000"
+
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile.migrations
+    depends_on:
+            - db
 
 volumes:
   db-data:

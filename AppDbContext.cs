@@ -1,10 +1,9 @@
 
-
 using Microsoft.EntityFrameworkCore;
 
-public class MyDbContext : DbContext
+public class AppDbContext : DbContext
 {
-    public MyDbContext(DbContextOptions<MyDbContext> options)
+    public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
     {
     }
