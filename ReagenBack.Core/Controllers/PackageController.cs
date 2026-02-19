@@ -7,12 +7,11 @@ namespace ReagenBack.Core.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PackagesController : CrudControllerBase<Package, PackageCreateDto, PackageReadDto>
+public class PackagesController(
+    AppDbContext context,
+    IMapper<Package, PackageCreateDto, PackageReadDto> mapper
+) : CrudControllerBase<Package, PackageCreateDto, PackageReadDto>(context, mapper)
 {
-    public PackagesController(
-        AppDbContext context, 
-        IMapper<Package, PackageCreateDto, PackageReadDto> mapper
-    ) : base(context, mapper) {}
 
     // TODO: Adicionar regra de validação de tamanho 
 }

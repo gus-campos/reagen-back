@@ -6,22 +6,17 @@ using ReagenBack.Core.Models;
 namespace ReagenBack.Core.Controllers;
 
 [ApiController]
-public abstract class CrudControllerBase<TEntity, TCreateDto, TReadDto> : ControllerBase 
+public abstract class CrudControllerBase<TEntity, TCreateDto, TReadDto>(
+    AppDbContext context,
+    IMapper<TEntity, TCreateDto, TReadDto> mapper
+) : ControllerBase 
     where TEntity : class, IWithId
     where TReadDto : IWithId
 {
     // FIXME: Verificar nomes repetido - na verdade isso é service
 
-    protected readonly AppDbContext _context;
-    protected readonly IMapper<TEntity, TCreateDto, TReadDto> _mapper;
-    protected CrudControllerBase(
-        AppDbContext context, 
-        IMapper<TEntity, TCreateDto, TReadDto> mapper
-    )
-    {
-        _mapper = mapper;
-        _context = context;
-    }
+    protected readonly AppDbContext _context = context;
+    protected readonly IMapper<TEntity, TCreateDto, TReadDto> _mapper = mapper;
 
     [HttpGet]
     public virtual async Task<ActionResult<IEnumerable<TReadDto>>> Get()

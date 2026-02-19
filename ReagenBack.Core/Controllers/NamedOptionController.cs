@@ -7,14 +7,14 @@ namespace ReagenBack.Core.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class NamedOptionsControllerBase<TEntity, TCreateDto, TReadDto> : CrudControllerBase<TEntity, TCreateDto, TReadDto> 
+public class NamedOptionsControllerBase<TEntity, TCreateDto, TReadDto>(
+    AppDbContext context,
+    IMapper<TEntity, TCreateDto, TReadDto> mapper
+) : CrudControllerBase<TEntity, TCreateDto, TReadDto>(context, mapper) 
     where TEntity : NamedOption
     where TReadDto : IWithId
 {
-    public NamedOptionsControllerBase(
-        AppDbContext context, 
-        IMapper<TEntity, TCreateDto, TReadDto> mapper
-    ) : base(context, mapper) {}
+    //
 }
 
 // Derivados

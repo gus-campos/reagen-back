@@ -8,13 +8,12 @@ namespace ReagenBack.Core.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ReagentsController : CrudControllerBase<Reagent, ReagentCreateDto,  ReagentReadDto>
+public class ReagentsController(
+    AppDbContext context,
+    IMapper<Reagent, ReagentCreateDto, ReagentReadDto> mapper
+) : CrudControllerBase<Reagent, ReagentCreateDto,  ReagentReadDto>(context, mapper)
 {
-    public ReagentsController(
-        AppDbContext context, 
-        IMapper<Reagent, ReagentCreateDto, ReagentReadDto> mapper
-    ) : base(context, mapper) {}
-    
+
     // FIXME: Adicionar validação para tamanho único.
 
     [HttpPost]
