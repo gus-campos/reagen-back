@@ -36,6 +36,9 @@ docker-compose.override.yml
 *.sql
 pgdata/
 
+# File database
+*.db
+
 # Logs
 *.log
 logs/
