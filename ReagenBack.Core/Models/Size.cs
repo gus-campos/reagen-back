@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Measure;
+namespace ReagenBack.Core.Models;
 
 public enum Dimension
 {

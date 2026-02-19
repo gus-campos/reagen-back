@@ -1,6 +1,10 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using ReagenBack.Core.Contexts;
+using ReagenBack.Core.Models;
+
+namespace ReagenBack.Core.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

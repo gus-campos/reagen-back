@@ -1,5 +1,5 @@
 
-using Measure;
+namespace ReagenBack.Core.Models;
 
 public class Package : IWithId
 {

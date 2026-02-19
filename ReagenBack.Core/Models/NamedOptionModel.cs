@@ -1,4 +1,6 @@
 
+namespace ReagenBack.Core.Models;
+
 public class NamedOption : IWithId
 {
     public int Id { get; set; }

@@ -1,5 +1,8 @@
 
 using Microsoft.EntityFrameworkCore;
+using ReagenBack.Core.Models;
+
+namespace ReagenBack.Core.Contexts;
 
 public class AppDbContext : DbContext
 {
@@ -9,7 +12,7 @@ public class AppDbContext : DbContext
     public DbSet<Package> Packages { get; set; } = null!;
     public DbSet<Vial> Vials { get; set; } = null!;
     public DbSet<Reagent> Reagents { get; set; } = null!;
-    public DbSet<Measure.Size> Sizes { get; set; } = null!;
+    public DbSet<Size> Sizes { get; set; } = null!;
     public DbSet<Supplier> Suppliers { get; set; } = null!;
     public DbSet<ControlAgency> ControlAgencies { get; set; } = null!;
     public DbSet<FundingSource> FundingSources { get; set; } = null!;
@@ -22,7 +25,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Package>().ToTable("Packages");
         modelBuilder.Entity<Vial>().ToTable("Vials");
         modelBuilder.Entity<Reagent>().ToTable("Reagents");
-        modelBuilder.Entity<Measure.Size>().ToTable("Sizes");
+        modelBuilder.Entity<Size>().ToTable("Sizes");
         modelBuilder.Entity<Supplier>().ToTable("Suppliers");
         modelBuilder.Entity<FundingSource>().ToTable("FundingSources");
         modelBuilder.Entity<ControlAgency>().ToTable("ControlAgencies");
@@ -75,7 +78,7 @@ public class AppDbContext : DbContext
 
         // Size
 
-        modelBuilder.Entity<Measure.Size>()
+        modelBuilder.Entity<Size>()
             .HasOne(s => s.Reagent)
             .WithMany()
             .OnDelete(DeleteBehavior.Cascade);
@@ -114,7 +117,7 @@ public class AppDbContext : DbContext
 
         // Size
 
-        modelBuilder.Entity<Measure.Size>()
+        modelBuilder.Entity<Size>()
             .Navigation(s => s.Reagent)
             .AutoInclude();
     }

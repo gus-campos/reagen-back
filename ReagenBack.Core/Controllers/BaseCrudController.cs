@@ -1,5 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ReagenBack.Core.Contexts;
+using ReagenBack.Core.Models;
+
+namespace ReagenBack.Core.Controllers;
 
 [ApiController]
 public abstract class CrudControllerBase<TEntity, TCreateDto, TReadDto> : ControllerBase 

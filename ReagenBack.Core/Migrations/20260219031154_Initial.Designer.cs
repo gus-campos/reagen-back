@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using ReagenBack.Core.Contexts;
 
 #nullable disable
 
 namespace ReagenBack.Core.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260219023735_Initial")]
+    [Migration("20260219031154_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -19,7 +20,7 @@ namespace ReagenBack.Core.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
 
-            modelBuilder.Entity("ControlAgency", b =>
+            modelBuilder.Entity("ReagenBack.Core.Models.ControlAgency", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,7 +35,7 @@ namespace ReagenBack.Core.Migrations
                     b.ToTable("ControlAgencies", (string)null);
                 });
 
-            modelBuilder.Entity("FundingSource", b =>
+            modelBuilder.Entity("ReagenBack.Core.Models.FundingSource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,7 +50,7 @@ namespace ReagenBack.Core.Migrations
                     b.ToTable("FundingSources", (string)null);
                 });
 
-            modelBuilder.Entity("Laboratory", b =>
+            modelBuilder.Entity("ReagenBack.Core.Models.Laboratory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -64,29 +65,7 @@ namespace ReagenBack.Core.Migrations
                     b.ToTable("Laboratories", (string)null);
                 });
 
-            modelBuilder.Entity("Measure.Size", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("ReagentId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Unit")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReagentId");
-
-                    b.ToTable("Sizes", (string)null);
-                });
-
-            modelBuilder.Entity("Package", b =>
+            modelBuilder.Entity("ReagenBack.Core.Models.Package", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -126,7 +105,7 @@ namespace ReagenBack.Core.Migrations
                     b.ToTable("Packages", (string)null);
                 });
 
-            modelBuilder.Entity("Reagent", b =>
+            modelBuilder.Entity("ReagenBack.Core.Models.Reagent", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -149,7 +128,29 @@ namespace ReagenBack.Core.Migrations
                     b.ToTable("Reagents", (string)null);
                 });
 
-            modelBuilder.Entity("Supplier", b =>
+            modelBuilder.Entity("ReagenBack.Core.Models.Size", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("REAL");
+
+                    b.Property<int>("ReagentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Unit")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReagentId");
+
+                    b.ToTable("Sizes", (string)null);
+                });
+
+            modelBuilder.Entity("ReagenBack.Core.Models.Supplier", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -164,7 +165,7 @@ namespace ReagenBack.Core.Migrations
                     b.ToTable("Suppliers", (string)null);
                 });
 
-            modelBuilder.Entity("Vial", b =>
+            modelBuilder.Entity("ReagenBack.Core.Models.Vial", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -188,37 +189,26 @@ namespace ReagenBack.Core.Migrations
                     b.ToTable("Vials", (string)null);
                 });
 
-            modelBuilder.Entity("Measure.Size", b =>
+            modelBuilder.Entity("ReagenBack.Core.Models.Package", b =>
                 {
-                    b.HasOne("Reagent", "Reagent")
-                        .WithMany()
-                        .HasForeignKey("ReagentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Reagent");
-                });
-
-            modelBuilder.Entity("Package", b =>
-                {
-                    b.HasOne("FundingSource", "FundingSource")
+                    b.HasOne("ReagenBack.Core.Models.FundingSource", "FundingSource")
                         .WithMany()
                         .HasForeignKey("FundingSourceId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("Reagent", "Reagent")
+                    b.HasOne("ReagenBack.Core.Models.Reagent", "Reagent")
                         .WithMany()
                         .HasForeignKey("ReagentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Measure.Size", "Size")
+                    b.HasOne("ReagenBack.Core.Models.Size", "Size")
                         .WithMany()
                         .HasForeignKey("SizeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Supplier", "Supplier")
+                    b.HasOne("ReagenBack.Core.Models.Supplier", "Supplier")
                         .WithMany()
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -232,9 +222,9 @@ namespace ReagenBack.Core.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("Reagent", b =>
+            modelBuilder.Entity("ReagenBack.Core.Models.Reagent", b =>
                 {
-                    b.HasOne("ControlAgency", "ControlAgency")
+                    b.HasOne("ReagenBack.Core.Models.ControlAgency", "ControlAgency")
                         .WithMany()
                         .HasForeignKey("ControlAgencyId")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -242,15 +232,26 @@ namespace ReagenBack.Core.Migrations
                     b.Navigation("ControlAgency");
                 });
 
-            modelBuilder.Entity("Vial", b =>
+            modelBuilder.Entity("ReagenBack.Core.Models.Size", b =>
                 {
-                    b.HasOne("Laboratory", "Laboratory")
+                    b.HasOne("ReagenBack.Core.Models.Reagent", "Reagent")
+                        .WithMany()
+                        .HasForeignKey("ReagentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reagent");
+                });
+
+            modelBuilder.Entity("ReagenBack.Core.Models.Vial", b =>
+                {
+                    b.HasOne("ReagenBack.Core.Models.Laboratory", "Laboratory")
                         .WithMany()
                         .HasForeignKey("LaboratoryId")
                         .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
-                    b.HasOne("Package", "Package")
+                    b.HasOne("ReagenBack.Core.Models.Package", "Package")
                         .WithMany()
                         .HasForeignKey("PackageId")
                         .OnDelete(DeleteBehavior.SetNull)
