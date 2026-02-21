@@ -1,4 +1,6 @@
 
+using System.Text.Json;
+
 namespace ReagenBack.Core.Models;
 
 public class Reagent : IWithId
@@ -44,10 +46,14 @@ public class ReagentMapper(
 
     public ReagentReadDto ToReadDto(Reagent reagent)
     {
-        return new() {    
+        return new() 
+        {    
+            Id = reagent.Id,
             Name = reagent.Name,
             Dimension = reagent.Dimension,
-            ControlAgency = reagent.ControlAgency == null ? null : controlAgencyMapper.ToReadDto(reagent.ControlAgency)
+            ControlAgency = reagent.ControlAgency == null 
+                ? null 
+                : controlAgencyMapper.ToReadDto(reagent.ControlAgency)
         };
     }
 }

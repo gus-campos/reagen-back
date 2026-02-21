@@ -1,60 +1,43 @@
 
 using Microsoft.AspNetCore.Mvc;
-using ReagenBack.Core.Contexts;
 using ReagenBack.Core.Models;
+using ReagenBack.Core.Services;
 
 namespace ReagenBack.Core.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class NamedOptionsControllerBase<TEntity, TCreateDto, TReadDto>(
-    AppDbContext context,
-    IMapper<TEntity, TCreateDto, TReadDto> mapper
-) : CrudControllerBase<TEntity, TCreateDto, TReadDto>(context, mapper) 
+public abstract class NamedOptionsControllerBase<TEntity, TCreateDto, TReadDto>(
+    ICrudService<TEntity, TCreateDto, TReadDto> crudService
+) : CrudControllerBase<TEntity, TCreateDto, TReadDto>(crudService)
     where TEntity : NamedOption
-    where TReadDto : IWithId
+    where TCreateDto : class
+    where TReadDto : class, IWithId
 {
-    //
+    // Regras para todos os controllers de named options
+    // Não necessário casa não haja regras para todos
 }
 
 // Derivados
 
 [Route("api/suppliers")]
-public class SuppliersController 
-    : NamedOptionsControllerBase<Supplier, SupplierCreateDto, SupplierReadDto>
-{
-    public SuppliersController(
-        AppDbContext context, 
-        IMapper<Supplier, SupplierCreateDto, SupplierReadDto> mapper
-    ) : base(context, mapper) {}
-}
+public class SuppliersController(
+    SupplierService supplierService
+) : NamedOptionsControllerBase<Supplier, SupplierCreateDto, SupplierReadDto>(supplierService)
+{}
 
 [Route("api/laboratories")]
-public class LaboratoriesController 
-    : NamedOptionsControllerBase<Laboratory, LaboratoryCreateDto, LaboratoryReadDto>
-{
-    public LaboratoriesController(
-        AppDbContext context, 
-        IMapper<Laboratory, LaboratoryCreateDto, LaboratoryReadDto> mapper
-    ) : base(context, mapper) {}
-}
+public class LaboratoriesController(
+    LaboratoryService laboratoryService
+) : NamedOptionsControllerBase<Laboratory, LaboratoryCreateDto, LaboratoryReadDto>(laboratoryService)
+{}
 
 [Route("api/control-agencies")]
-public class ControlAgenciesController 
-    : NamedOptionsControllerBase<ControlAgency, ControlAgencyCreateDto, ControlAgencyReadDto>
-{
-    public ControlAgenciesController(
-        AppDbContext context, 
-        IMapper<ControlAgency, ControlAgencyCreateDto, ControlAgencyReadDto> mapper
-    ) : base(context, mapper) {}
-}
+public class ControlAgenciesController(
+    ControlAgencyService controlAgencyService
+) : NamedOptionsControllerBase<ControlAgency, ControlAgencyCreateDto, ControlAgencyReadDto>(controlAgencyService)
+{}
 
 [Route("api/funding-sources")]
-public class FundingSourcesController 
-    : NamedOptionsControllerBase<FundingSource, FundingSourceCreateDto, FundingSourceReadDto>
-{
-    public FundingSourcesController(
-        AppDbContext context, 
-        IMapper<FundingSource, FundingSourceCreateDto, FundingSourceReadDto> mapper
-    ) : base(context, mapper) {}
-}
+public class FundingSourcesController(
+    FundingSourceService fundingSourceService
+) : NamedOptionsControllerBase<FundingSource, FundingSourceCreateDto, FundingSourceReadDto>(fundingSourceService)
+{}

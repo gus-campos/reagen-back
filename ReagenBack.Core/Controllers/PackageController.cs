@@ -1,17 +1,15 @@
 
 using Microsoft.AspNetCore.Mvc;
-using ReagenBack.Core.Contexts;
 using ReagenBack.Core.Models;
+using ReagenBack.Core.Services;
 
 namespace ReagenBack.Core.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class PackagesController(
-    AppDbContext context,
-    IMapper<Package, PackageCreateDto, PackageReadDto> mapper
-) : CrudControllerBase<Package, PackageCreateDto, PackageReadDto>(context, mapper)
+    PackageService packageService
+) : CrudControllerBase<Package, PackageCreateDto, PackageReadDto>(packageService)
 {
-
     // TODO: Adicionar regra de validação de tamanho 
 }

@@ -1,11 +1,6 @@
 
 namespace ReagenBack.Core.Models;
 
-public interface IWithId
-{
-    int Id { get; set; }
-}
-
 public interface IMapper<TEntity, TCreateDto, TReadDto>
     where TReadDto : IWithId
 {

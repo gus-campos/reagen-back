@@ -46,7 +46,9 @@ public class VialMapper(
 
     public VialReadDto ToReadDto(Vial vial)
     {
-        return new() {    
+        return new() 
+        {    
+            Id = vial.Id,
             OutDate = vial.OutDate,
             Package = packageMapper.ToReadDto(vial.Package),
             Laboratory = laboratoryMapper.ToReadDto(vial.Laboratory)

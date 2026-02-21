@@ -91,6 +91,12 @@ public class AppDbContext : DbContext
             .Navigation(r => r.ControlAgency)
             .AutoInclude();
 
+        // Size
+
+        modelBuilder.Entity<Size>()
+            .Navigation(s => s.Reagent)
+            .AutoInclude();
+
         // Package
 
         modelBuilder.Entity<Package>()
@@ -103,6 +109,10 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<Package>()
             .Navigation(p => p.Supplier)
+            .AutoInclude();
+
+        modelBuilder.Entity<Package>()
+            .Navigation(p => p.Size)
             .AutoInclude();
 
         // Vial

@@ -34,6 +34,7 @@ public class NamedOptionMapper<TEntity, TCreateDto, TReadDto> : IMapper<TEntity,
 
     public TReadDto ToReadDto(TEntity entity) => new()
     {
+        Id = entity.Id,
         Name = entity.Name
     };
 }

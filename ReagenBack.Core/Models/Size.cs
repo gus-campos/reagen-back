@@ -4,21 +4,21 @@ namespace ReagenBack.Core.Models;
 
 public enum Dimension
 {
-    Mass,
-    Volume,
-    Count,
-    Matter
+    Mass = 0,
+    Volume = 1,
+    Count = 2,
+    Matter = 3
 }
 
 public enum Unit
 {
-    Kilogram,
-    Gram,
-    Milligram,
-    Liter,
-    Milliliter,
-    Mol,
-    Units
+    Kilogram = 0,
+    Gram = 1,
+    Milligram = 2,
+    Liter = 3,
+    Milliliter = 4,
+    Mol = 5,
+    Units = 6
 }
 
 public static class UnitDimension
@@ -62,11 +62,11 @@ public class SizeReadDto : IWithId
     public int Id { get; set;}
     public double Amount { get; set; }
     public Unit Unit { get; set; }
-    public ReagentReadDto Reagent { get; set; } = default!;
+    public int ReagentId { get; set; }
 }
 
 public class SizeMapper(
-    ReagentMapper reagentMapper
+    // ReagentMapper reagentMapper
 ) : IMapper<Size, SizeCreateDto, SizeReadDto>
 {
     public Size ToEntity(SizeCreateDto dto, int id)
@@ -80,14 +80,14 @@ public class SizeMapper(
         };
     } 
 
-    public SizeReadDto ToReadDto(Size vial)
+    public SizeReadDto ToReadDto(Size size)
     {
         return new()
         {
-            Id = vial.Id,
-            Amount = vial.Amount,
-            Unit = vial.Unit,
-            Reagent = reagentMapper.ToReadDto(vial.Reagent),
+            Id = size.Id,
+            Amount = size.Amount,
+            Unit = size.Unit,
+            ReagentId = size.ReagentId
         };
     }
 }

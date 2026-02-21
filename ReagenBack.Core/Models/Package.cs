@@ -70,7 +70,9 @@ public class PackageMapper(
 
     public PackageReadDto ToReadDto(Package package)
     {
-        return new() {    
+        return new() 
+        {    
+            Id = package.Id,
             Purity = package.Purity,
             InDate = package.InDate,
             ExpireDate = package.ExpireDate,
