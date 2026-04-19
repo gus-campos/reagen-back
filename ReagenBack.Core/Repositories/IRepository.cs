@@ -3,7 +3,7 @@ using ReagenBack.Core.Models;
 namespace ReagenBack.Core.Repositories;
 
 public interface IRepository<TEntity>
-    where TEntity : IWithId
+    where TEntity : IEntity
 {
     Task<List<TEntity>> GetAllAsync();
     Task<TEntity?> GetByIdAsync(int id);

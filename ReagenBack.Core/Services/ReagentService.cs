@@ -8,4 +8,6 @@ public class ReagentService(
     ReagentRepository reagentRepository,
     ReagentMapper reagentMapper
 ) : CrudServiceBase<Reagent, ReagentCreateDto, ReagentReadDto>(reagentRepository, reagentMapper)
-{}
+{
+    // TODO: Impedir criação com nome repetido
+}

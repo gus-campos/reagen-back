@@ -1,9 +1,11 @@
 
 namespace ReagenBack.Core.Models;
 
-public class Vial : IWithId
+public class Vial : IOwnedEntity
 {
     public int Id { get; set; }
+    public int UserId { get; set; }
+
     public DateTime? OutDate { get; set; }
 
     public int PackageId { get; set; }
@@ -20,7 +22,7 @@ public class VialCreateDto
     public int LaboratoryId { get; set; }
 }
 
-public class VialReadDto : IWithId
+public class VialReadDto : IEntity
 {
     public int Id { get; set; }
     public DateTime? OutDate { get; set; }

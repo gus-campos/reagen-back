@@ -9,4 +9,7 @@ namespace ReagenBack.Core.Controllers;
 public class VialsController(
     VialService crudService
 ) : CrudControllerBase<Vial, VialCreateDto, VialReadDto>(crudService)
-{}
+{
+    // TODO: Adicionar criação de múltiplos vials iguais
+    // Expor endpoint para isso
+}

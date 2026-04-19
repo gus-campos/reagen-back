@@ -37,9 +37,11 @@ public static class UnitDimension
     };
 }
 
-public class Size : IWithId
+public class Size : IOwnedEntity
 {
     public int Id { get; set;}
+    public int UserId { get; set; }
+
     public double Amount { get; set; }
     public Unit Unit { get; set; }
 
@@ -57,7 +59,7 @@ public class SizeCreateDto
     public int ReagentId { get; set; }
 }
 
-public class SizeReadDto : IWithId
+public class SizeReadDto : IEntity
 {
     public int Id { get; set;}
     public double Amount { get; set; }

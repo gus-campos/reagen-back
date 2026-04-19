@@ -10,7 +10,7 @@ public abstract class NamedOptionsControllerBase<TEntity, TCreateDto, TReadDto>(
 ) : CrudControllerBase<TEntity, TCreateDto, TReadDto>(crudService)
     where TEntity : NamedOption
     where TCreateDto : class
-    where TReadDto : class, IWithId
+    where TReadDto : class, IEntity
 {
     // Regras para todos os controllers de named options
     // Não necessário casa não haja regras para todos

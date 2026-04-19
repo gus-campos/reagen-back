@@ -8,9 +8,9 @@ public abstract class CrudServiceBase<TEntity, TCreateDto, TReadDto>(
     IRepository<TEntity> repository,
     IMapper<TEntity, TCreateDto, TReadDto> mapper
 ) : ICrudService<TEntity, TCreateDto, TReadDto>
-    where TEntity : class, IWithId
+    where TEntity : class, IEntity
     where TCreateDto : class
-    where TReadDto : class, IWithId
+    where TReadDto : class, IEntity
 {
     protected readonly IRepository<TEntity> _repository = repository;
 

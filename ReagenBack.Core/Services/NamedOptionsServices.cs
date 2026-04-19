@@ -10,9 +10,8 @@ public abstract class NamedOptionServiceBase<TEntity, TCreateDto, TReadDto>(
 ) : CrudServiceBase<TEntity, TCreateDto, TReadDto>(repository, mapper)
     where TEntity : NamedOption
     where TCreateDto : class
-    where TReadDto : class, IWithId
+    where TReadDto : class, IEntity
 {   
-    // Regras para todos
     // TODO: Impedir criação com nome repetido
 }
 

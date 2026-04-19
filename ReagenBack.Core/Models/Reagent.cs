@@ -1,11 +1,11 @@
 
-using System.Text.Json;
-
 namespace ReagenBack.Core.Models;
 
-public class Reagent : IWithId
+public class Reagent : IOwnedEntity
 {
     public int Id { get; set; }
+    public int UserId { get; set; }
+
     public string Name { get; set; } = default!;
     public Dimension Dimension { get; set; }
 
@@ -20,7 +20,7 @@ public class ReagentCreateDto
     public int? ControlAgencyId { get; set; }
 }
 
-public class ReagentReadDto : IWithId
+public class ReagentReadDto : IEntity
 {
     public int Id { get; set; }
     public string Name { get; set; } = default!;

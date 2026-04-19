@@ -8,9 +8,9 @@ namespace ReagenBack.Core.Controllers;
 public abstract class CrudControllerBase<TEntity, TCreateDto, TReadDto>(
     ICrudService<TEntity, TCreateDto, TReadDto> crudService
 ) : ControllerBase 
-    where TEntity : class, IWithId
+    where TEntity : class, IEntity
     where TCreateDto : class
-    where TReadDto : class, IWithId
+    where TReadDto : class, IEntity
 {
     [HttpGet]
     public virtual async Task<ActionResult<IEnumerable<TReadDto>>> Get()

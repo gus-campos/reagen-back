@@ -1,9 +1,11 @@
 
 namespace ReagenBack.Core.Models;
 
-public class Package : IWithId
+public class Package : IOwnedEntity
 {
     public int Id { get; set; }
+    public int UserId { get; set; }
+
     public double Purity { get; set; }
     public DateTime InDate { get; set; }
     public DateTime ExpireDate { get; set; }
@@ -33,7 +35,7 @@ public class PackageCreateDto
     public int? SupplierId { get; set; }
 }
 
-public class PackageReadDto : IWithId
+public class PackageReadDto : IEntity
 {
     public int Id { get; set; }
     public double Purity { get; set; }

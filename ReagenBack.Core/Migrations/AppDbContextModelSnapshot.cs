@@ -27,6 +27,9 @@ namespace ReagenBack.Core.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("ControlAgencies", (string)null);
@@ -42,6 +45,9 @@ namespace ReagenBack.Core.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("FundingSources", (string)null);
@@ -56,6 +62,9 @@ namespace ReagenBack.Core.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -89,6 +98,9 @@ namespace ReagenBack.Core.Migrations
                     b.Property<int?>("SupplierId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FundingSourceId");
@@ -118,6 +130,9 @@ namespace ReagenBack.Core.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ControlAgencyId");
@@ -140,6 +155,9 @@ namespace ReagenBack.Core.Migrations
                     b.Property<int>("Unit")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ReagentId");
@@ -157,9 +175,33 @@ namespace ReagenBack.Core.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("Suppliers", (string)null);
+                });
+
+            modelBuilder.Entity("ReagenBack.Core.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AuthProviderId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("ReagenBack.Core.Models.Vial", b =>
@@ -175,6 +217,9 @@ namespace ReagenBack.Core.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("PackageId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

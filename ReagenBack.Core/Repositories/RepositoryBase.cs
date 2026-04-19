@@ -8,7 +8,7 @@ namespace ReagenBack.Core.Repositories;
 public abstract class RepositoryBase<TEntity>(
     AppDbContext context
 ) : IRepository<TEntity>
-    where TEntity : class, IWithId
+    where TEntity : class, IEntity
 {
     protected readonly AppDbContext _context = context;
 
@@ -19,7 +19,8 @@ public abstract class RepositoryBase<TEntity>(
 
     public async Task<TEntity?> GetByIdAsync(int id) {
 
-        return await _context.Set<TEntity>().FindAsync(id);
+        return await _context.Set<TEntity>()
+            .FirstOrDefaultAsync(e => e.Id == id);
     }
 
     public async Task<TEntity> AddAsync(TEntity entity) {
@@ -47,7 +48,9 @@ public abstract class RepositoryBase<TEntity>(
 
     public async Task<bool> DeleteAsync(int id) {
 
-        var item = await _context.Set<TEntity>().FindAsync(id);
+        var item = await _context.Set<TEntity>()
+            .FirstOrDefaultAsync(e => e.Id == id);
+        
         if (item == null) return false;
 
         _context.Set<TEntity>().Remove(item);
@@ -61,11 +64,16 @@ public abstract class RepositoryBase<TEntity>(
         _context.Entry(entity).State = EntityState.Detached;
 
         var loaded = await _context.Set<TEntity>()
-            .FindAsync(entity.Id);
+            .FirstOrDefaultAsync(e => e.Id == entity.Id);
 
         if (loaded == null)
             throw new Exception("The loaded entity wasn't expected to be null.");
 
         return loaded;
+    }
+
+    public async Task<bool> BelongsToCurrentUserAsync(int entityId)
+    {
+        return await _context.Set<TEntity>().AnyAsync(e => e.Id == entityId);
     }
 }

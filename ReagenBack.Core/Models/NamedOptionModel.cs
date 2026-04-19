@@ -1,9 +1,11 @@
 
 namespace ReagenBack.Core.Models;
 
-public class NamedOption : IWithId
+public class NamedOption : IOwnedEntity
 {
     public int Id { get; set; }
+    public int UserId { get; set; }
+    
     public string Name { get; set; } = default!;
 }
 
@@ -12,7 +14,7 @@ public class NamedOptionCreateDto
     public string Name { get; set; } = default!;
 }
 
-public class NamedOptionReadDto : IWithId
+public class NamedOptionReadDto : IEntity
 {
     public int Id { get; set; }
     public string Name { get; set; } = default!;

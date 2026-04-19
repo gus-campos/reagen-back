@@ -3,7 +3,7 @@ using ReagenBack.Core.Models;
 namespace ReagenBack.Core.Services;
 
 public interface ICrudService<TEntity, TCreateDto, TReadDto> 
-    where TEntity : class, IWithId
+    where TEntity : class, IEntity
 {
     Task<IEnumerable<TReadDto>> GetAllAsync();
     Task<TReadDto?> GetByIdAsync(int id);
