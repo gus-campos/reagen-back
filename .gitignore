@@ -42,3 +42,6 @@ pgdata/
 # Logs
 *.log
 logs/
+
+# Env
+.env

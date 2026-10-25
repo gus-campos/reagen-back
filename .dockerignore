@@ -1,0 +1,9 @@
+**/bin/
+**/obj/
+**/*.db
+**/appsettings.*.json
+.git/
+.vscode/
+.env
+dotnet-install.sh
+ReagenBack.Tests/

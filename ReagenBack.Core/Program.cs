@@ -79,8 +79,11 @@ builder.Services.AddScoped<IStructuredHttpContext, StructuredHttpContext>();
 // Para acessar contexto http e verificar user
 builder.Services.AddHttpContextAccessor();
 
+var connectionString = builder.Configuration.GetConnectionString("Default")
+    ?? throw new Exception("Connection string 'Default' não encontrada.");
+
 builder.Services.AddDbContext<AppDbContext>((sp, options) =>
-    options.UseSqlite("DataSource=test.db;Foreign Keys=True")
+    options.UseNpgsql(connectionString)
         // A cada salvamento verifica o pertencimento
         .AddInterceptors(sp.GetRequiredService<OwnedEntityInterceptor>())
 );
@@ -150,11 +153,12 @@ var app = builder.Build();
 
 // Pipeline
 
-// Para permitir que o banco em arquivo funcione devidamente
-using var scope = app.Services.CreateScope();
-var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-db.Database.OpenConnection();
-db.Database.Migrate();
+// Aplica migrations pendentes ao iniciar
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
 
 // Swagger
 if (app.Environment.IsDevelopment())
