@@ -1,5 +1,7 @@
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using ReagenBack.Core.Models;
 using ReagenBack.Core.Services;
 
@@ -12,8 +14,25 @@ public abstract class NamedOptionsControllerBase<TEntity, TCreateDto, TReadDto>(
     where TCreateDto : class
     where TReadDto : class, IEntity
 {
-    // Regras para todos os controllers de named options
-    // Não necessário casa não haja regras para todos
+    // Nome repetido viola o índice único (UserId, Name)
+
+    public override async Task<ActionResult<TReadDto>> Post(TCreateDto createDto)
+    {
+        try { return await base.Post(createDto); }
+        catch (DbUpdateException e) when (IsUniqueViolation(e)) { return DuplicateName(); }
+    }
+
+    public override async Task<IActionResult> Put(int id, TCreateDto createDto)
+    {
+        try { return await base.Put(id, createDto); }
+        catch (DbUpdateException e) when (IsUniqueViolation(e)) { return DuplicateName(); }
+    }
+
+    private static bool IsUniqueViolation(DbUpdateException e) =>
+        e.InnerException is PostgresException { SqlState: PostgresErrorCodes.UniqueViolation };
+
+    private ConflictObjectResult DuplicateName() =>
+        Conflict(new { message = "Já existe um item com esse nome." });
 }
 
 // Derivados

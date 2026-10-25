@@ -12,7 +12,7 @@ public abstract class NamedOptionServiceBase<TEntity, TCreateDto, TReadDto>(
     where TCreateDto : class
     where TReadDto : class, IEntity
 {   
-    // TODO: Impedir criação com nome repetido
+    // Nome repetido é impedido pelo índice único (UserId, Name), ver NamedOption
 }
 
 // Derivados

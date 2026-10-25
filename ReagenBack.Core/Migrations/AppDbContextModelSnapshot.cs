@@ -39,7 +39,8 @@ namespace ReagenBack.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId", "Name")
+                        .IsUnique();
 
                     b.ToTable("ControlAgencies", (string)null);
                 });
@@ -61,7 +62,8 @@ namespace ReagenBack.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId", "Name")
+                        .IsUnique();
 
                     b.ToTable("FundingSources", (string)null);
                 });
@@ -83,7 +85,8 @@ namespace ReagenBack.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId", "Name")
+                        .IsUnique();
 
                     b.ToTable("Laboratories", (string)null);
                 });
@@ -211,7 +214,8 @@ namespace ReagenBack.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId", "Name")
+                        .IsUnique();
 
                     b.ToTable("Suppliers", (string)null);
                 });

@@ -1,6 +1,10 @@
 
+using Microsoft.EntityFrameworkCore;
+
 namespace ReagenBack.Core.Models;
 
+// Nome não pode se repetir para o mesmo usuário (herdado pelas derivadas)
+[Index(nameof(UserId), nameof(Name), IsUnique = true)]
 public class NamedOption : IOwnedEntity
 {
     public int Id { get; set; }
