@@ -37,6 +37,15 @@ A API fica em http://localhost:5078/swagger. As migrations são aplicadas automa
 
 Para parar: `docker compose down` (adicione `-v` para apagar os dados do banco).
 
+## Autenticação em desenvolvimento (dev-auth)
+
+Enquanto não há login real, o endpoint `POST /dev-auth?providerUserId=<qualquer-texto>` gera um JWT sem senha. O `providerUserId` é um identificador inventado (ex.: `João`); cada valor é um usuário diferente, criado automaticamente na primeira chamada. Só funciona em `Development` (em outros ambientes retorna 404).
+
+No Swagger:
+
+1. Execute `POST /dev-auth` com um `providerUserId` e copie o `token` da resposta.
+2. Clique em **Authorize** e cole o token.
+
 ## Rodar a API localmente
 
 Suba só o Postgres:

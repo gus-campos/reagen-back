@@ -190,10 +190,7 @@ public class AppDbContext(
             
         foreach (var entry in entries)
         {
-            // FIXME
-            if (entry.Entity.UserId != currentUserId)
-                throw new Exception("Não pode manipular instâncias de outros usuários.");
-
+            // O dono da própria entidade é definido pelo OwnedEntityInterceptor
             foreach (var reference in entry.References)
             {
                 if (reference.TargetEntry?.Entity is IOwnedEntity referenced)
