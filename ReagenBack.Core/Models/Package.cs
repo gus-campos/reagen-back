@@ -7,8 +7,8 @@ public class Package : IOwnedEntity
     public int UserId { get; set; }
 
     public double Purity { get; set; }
-    public DateTime InDate { get; set; }
-    public DateTime ExpireDate { get; set; }
+    public DateOnly InDate { get; set; }
+    public DateOnly ExpireDate { get; set; }
 
     public int SizeId { get; set; }
     public Size Size { get; set; } = default!;
@@ -26,8 +26,8 @@ public class Package : IOwnedEntity
 public class PackageCreateDto
 {
     public double Purity { get; set; }
-    public DateTime InDate { get; set; }
-    public DateTime ExpireDate { get; set; }
+    public DateOnly InDate { get; set; }
+    public DateOnly ExpireDate { get; set; }
 
     public int SizeId { get; set; }
     public int ReagentId { get; set; }
@@ -39,8 +39,8 @@ public class PackageReadDto : IEntity
 {
     public int Id { get; set; }
     public double Purity { get; set; }
-    public DateTime InDate { get; set; }
-    public DateTime ExpireDate { get; set; }
+    public DateOnly InDate { get; set; }
+    public DateOnly ExpireDate { get; set; }
     
     public Size Size { get; set; } = default!;
     public ReagentReadDto Reagent { get; set; } = default!;

@@ -12,7 +12,7 @@ using ReagenBack.Core.Contexts;
 namespace ReagenBack.Core.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20261024205331_Initial")]
+    [Migration("20261025123628_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -99,14 +99,14 @@ namespace ReagenBack.Core.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("ExpireDate")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<DateOnly>("ExpireDate")
+                        .HasColumnType("date");
 
                     b.Property<int?>("FundingSourceId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("InDate")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<DateOnly>("InDate")
+                        .HasColumnType("date");
 
                     b.Property<double>("Purity")
                         .HasColumnType("double precision");
@@ -253,8 +253,8 @@ namespace ReagenBack.Core.Migrations
                     b.Property<int>("LaboratoryId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("OutDate")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<DateOnly?>("OutDate")
+                        .HasColumnType("date");
 
                     b.Property<int>("PackageId")
                         .HasColumnType("integer");

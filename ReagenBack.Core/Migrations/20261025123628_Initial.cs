@@ -171,8 +171,8 @@ namespace ReagenBack.Core.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     Purity = table.Column<double>(type: "double precision", nullable: false),
-                    InDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    ExpireDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    InDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    ExpireDate = table.Column<DateOnly>(type: "date", nullable: false),
                     SizeId = table.Column<int>(type: "integer", nullable: false),
                     ReagentId = table.Column<int>(type: "integer", nullable: false),
                     FundingSourceId = table.Column<int>(type: "integer", nullable: true),
@@ -220,7 +220,7 @@ namespace ReagenBack.Core.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<int>(type: "integer", nullable: false),
-                    OutDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    OutDate = table.Column<DateOnly>(type: "date", nullable: true),
                     PackageId = table.Column<int>(type: "integer", nullable: false),
                     LaboratoryId = table.Column<int>(type: "integer", nullable: false)
                 },

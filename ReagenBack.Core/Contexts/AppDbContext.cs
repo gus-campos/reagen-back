@@ -21,13 +21,6 @@ public class AppDbContext(
     public DbSet<FundingSource> FundingSources { get; set; } = null!;
     public DbSet<Laboratory> Laboratories { get; set; } = null!;
 
-    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
-    {
-        // Datas sem fuso: o Npgsql recusa DateTime não-UTC em "timestamp with time zone"
-        configurationBuilder.Properties<DateTime>()
-            .HaveColumnType("timestamp without time zone");
-    }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Necessário materializar antes de iterar
