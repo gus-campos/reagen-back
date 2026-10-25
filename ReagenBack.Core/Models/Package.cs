@@ -42,13 +42,14 @@ public class PackageReadDto : IEntity
     public DateOnly InDate { get; set; }
     public DateOnly ExpireDate { get; set; }
     
-    public Size Size { get; set; } = default!;
+    public SizeReadDto Size { get; set; } = default!;
     public ReagentReadDto Reagent { get; set; } = default!;
     public FundingSourceReadDto? FundingSource { get; set; }
     public SupplierReadDto? Supplier { get; set; }
 }
 
 public class PackageMapper(
+        SizeMapper sizeMapper,
         ReagentMapper reagentMapper,
         FundingSourceMapper fundingSourceMapper,
         SupplierMapper supplierMapper
@@ -79,7 +80,7 @@ public class PackageMapper(
             InDate = package.InDate,
             ExpireDate = package.ExpireDate,
 
-            Size = package.Size,
+            Size = sizeMapper.ToReadDto(package.Size),
             Reagent = reagentMapper.ToReadDto(package.Reagent),
             FundingSource = package.FundingSource == null ? null : fundingSourceMapper.ToReadDto(package.FundingSource),
             Supplier = package.Supplier == null ? null : supplierMapper.ToReadDto(package.Supplier),
