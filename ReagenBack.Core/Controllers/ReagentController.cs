@@ -6,7 +6,7 @@ using ReagenBack.Core.Services;
 namespace ReagenBack.Core.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/reagents")]
 public class ReagentsController(
     ReagentService reagentService
 ) : CrudControllerBase<Reagent, ReagentCreateDto, ReagentReadDto>(reagentService)

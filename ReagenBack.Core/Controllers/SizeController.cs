@@ -6,7 +6,7 @@ using ReagenBack.Core.Services;
 namespace ReagenBack.Core.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/sizes")]
 public class SizesController(
     SizeService sizeService
 ) : CrudControllerBase<Size, SizeCreateDto, SizeReadDto>(sizeService)

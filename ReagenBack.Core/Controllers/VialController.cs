@@ -5,7 +5,7 @@ using ReagenBack.Core.Services;
 namespace ReagenBack.Core.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/vials")]
 public class VialsController(
     VialService crudService
 ) : CrudControllerBase<Vial, VialCreateDto, VialReadDto>(crudService)

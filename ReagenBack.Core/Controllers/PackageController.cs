@@ -6,7 +6,7 @@ using ReagenBack.Core.Services;
 namespace ReagenBack.Core.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/packages")]
 public class PackagesController(
     PackageService packageService
 ) : CrudControllerBase<Package, PackageCreateDto, PackageReadDto>(packageService)
